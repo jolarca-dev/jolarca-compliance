@@ -1,0 +1,10 @@
+vendor,role,ropa_ids,dpa_signed,dpa_expiry,tia_required,tia_status,next_review,owner,status
+stripe,Processor payments,ROPA-003,no,,yes,required-SCC,2027-08-15,TBD,onboarding
+google-cloud,Processor infrastructure,all,no,,no,EU-region-commitment,2027-08-15,TBD,onboarding
+deepl,Processor translation,ROPA-005,no,,yes,required,2027-08-15,TBD,onboarding
+openai,Processor LLM,ROPA-005,no,,yes,required-SCC,2027-08-15,TBD,onboarding
+anthropic,Processor LLM,ROPA-005,no,,yes,required-SCC,2027-08-15,TBD,onboarding
+dpd,Processor shipping,ROPA-003,no,,no,EU-only,2027-08-15,TBD,onboarding
+omniva,Processor shipping,ROPA-003,no,,no,EU-only,2027-08-15,TBD,onboarding
+bitrix24,Processor CRM support,support-cases,no,,maybe,verify-hosting,2027-08-15,TBD,onboarding
+sentry-or-glitchtip,Processor error tracking,telemetry,no,,maybe,verify,2027-08-15,TBD,onboarding

@@ -1,0 +1,39 @@
+name: DSR SLA monitor
+
+# Daily: open DSRs vs the 30-day GDPR deadline (Art. 12(3)).
+# Warns at day 21, opens/updates a paging issue for the DPO.
+
+on:
+  schedule:
+    - cron: "30 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  sla:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Compute SLA status
+        id: sla
+        run: |
+          python scripts/dsr-sla-report.py data-subject-requests/register.md \
+            --warn-days 21 --machine > /tmp/sla.txt
+          cat /tmp/sla.txt
+          echo "at_risk=$(grep -c '^AT_RISK' /tmp/sla.txt || true)" >> "$GITHUB_OUTPUT"
+      - name: Page DPO at day 21+
+        if: steps.sla.outputs.at_risk != '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue create \
+            --title "DSR SLA at risk: ${{ steps.sla.outputs.at_risk }} request(s) past day 21" \
+            --label "dsr,sla-breach-risk" \
+            --body "$(cat /tmp/sla.txt)" \
+          || gh issue comment "$(gh issue list --label sla-breach-risk --state open --limit 1 --json number -q '.[0].number')" --body "$(cat /tmp/sla.txt)"

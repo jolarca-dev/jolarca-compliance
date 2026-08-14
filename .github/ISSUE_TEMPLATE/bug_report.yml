@@ -1,0 +1,24 @@
+name: Bug report
+description: Something in the compliance tooling/automation is broken
+labels: ["bug"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What is broken?
+      description: Workflow, script, lint gate, or doc rendering issue.
+    validations:
+      required: true
+  - type: textarea
+    id: impact
+    attributes:
+      label: Compliance impact
+      description: Does this block evidence collection, SLA monitoring, or audit readiness?
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+    validations:
+      required: true

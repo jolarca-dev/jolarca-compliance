@@ -1,0 +1,7 @@
+id,system,purpose,lawful_basis,data_categories,subjects,retention_class,recipients,transfer_mechanism,last_reviewed
+ROPA-001,users-app,Account & identity management,Art. 6(1)(b) contract,Identity; contact; auth credentials,Users,RC-ACCOUNT,Identity provider; Bitrix24 support,EU-only,2026-08-15
+ROPA-002,sellers-app,Seller onboarding & KYC verification,Art. 6(1)(c) legal obligation,Identity documents; business registry data,Sellers,RC-KYC,VIES; verification provider,EU-only,2026-08-15
+ROPA-003,orders-payments,Order & payment processing,Art. 6(1)(b) contract,Order; payment reference; address,Buyers; sellers,RC-FINANCIAL,Stripe (processor); DPD; Omniva,SCC+TIA (Stripe),2026-08-15
+ROPA-004,sellers-vies,VAT number validation,Art. 6(1)(c) legal obligation,VAT ID; business name,Sellers,RC-FINANCIAL,EU VIES service,EU-only,2026-08-15
+ROPA-005,ai-service,Translation & embeddings,Art. 6(1)(b) contract + consent,Listing text; messages,Users; sellers,RC-AI,DeepL; OpenAI; Anthropic; self-hosted,SCC+TIA per vendor,2026-08-15
+ROPA-006,geolocation-search,Proximity search,Consent Art. 6(1)(a),Coarse location,Users,RC-LOCATION,none,EU-only,2026-08-15

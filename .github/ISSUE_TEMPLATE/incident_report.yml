@@ -1,0 +1,54 @@
+name: Incident report
+description: Security / personal-data incident. Structured intake; auto-labels severity.
+title: "INCIDENT: "
+labels: ["incident"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        > If personal data may be affected, the **72-hour assessment clock** toward
+        > Art. 33 notification starts NOW. Record exact detection time below.
+        > Do not include names of affected individuals — use pseudonyms/case IDs.
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Preliminary severity
+      options:
+        - Critical — confirmed or suspected personal data breach
+        - High — security incident, personal data impact possible
+        - Medium — policy violation, no data impact expected
+        - Near-miss — nothing happened, but it nearly did
+    validations:
+      required: true
+  - type: dropdown
+    id: personal-data
+    attributes:
+      label: Personal data potentially affected?
+      options: ["Yes", "Unknown — under assessment", "No"]
+    validations:
+      required: true
+  - type: input
+    id: detected
+    attributes:
+      label: Detection time (UTC, YYYY-MM-DD HH:MM)
+      description: Starts the 72h clock if a breach is confirmed.
+    validations:
+      required: true
+  - type: textarea
+    id: facts
+    attributes:
+      label: What happened (facts only, no speculation)
+    validations:
+      required: true
+  - type: textarea
+    id: systems
+    attributes:
+      label: Affected systems / data categories
+    validations:
+      required: true
+  - type: textarea
+    id: containment
+    attributes:
+      label: Immediate containment actions taken
+    validations:
+      required: false

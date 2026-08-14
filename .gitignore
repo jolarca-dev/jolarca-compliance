@@ -16,3 +16,15 @@ venv/
 # OS / editor cruft
 .DS_Store
 Thumbs.db
+.idea/
+
+# ── Compliance repo excludes ────────────────────────────────────────────────
+# NEVER commit: signed originals cache, local exports of personal data,
+# DSR/investigation working files. These stay in the encrypted evidence vault.
+signed-originals/
+exports/
+*.export.*
+local-evidence/
+dsr-working/
+*.eml
+*.msg

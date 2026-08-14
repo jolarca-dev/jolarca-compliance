@@ -1,0 +1,59 @@
+name: Data subject request (DSR)
+description: Structured intake for Art. 15–22 requests. Do NOT paste personal data here.
+title: "DSR: "
+labels: ["dsr", "sla:30d"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        > 30-day clock (Art. 12(3)) starts at **receipt**. DPO is paged at day 21.
+        > **Never paste the request content or requester identity into this issue.**
+        > Use the case ID from the intake form; content stays in the DSR system.
+  - type: dropdown
+    id: type
+    attributes:
+      label: Request type
+      options:
+        - Art. 15 — Access
+        - Art. 16 — Rectification
+        - Art. 17 — Erasure
+        - Art. 18 — Restriction
+        - Art. 20 — Portability
+        - Art. 21 — Objection
+        - Art. 22 — Automated decision-making
+    validations:
+      required: true
+  - type: input
+    id: case
+    attributes:
+      label: Intake case ID (from DSR system)
+      placeholder: DSR-YYYY-NNN
+    validations:
+      required: true
+  - type: input
+    id: received
+    attributes:
+      label: Date received (YYYY-MM-DD)
+    validations:
+      required: true
+  - type: dropdown
+    id: identity
+    attributes:
+      label: Identity verification status
+      options: ["Verified", "Additional information requested", "Not yet verified"]
+    validations:
+      required: true
+  - type: dropdown
+    id: market
+    attributes:
+      label: Market / language
+      options: [LT, LV, EE, EN, RU]
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Systems in scope (anonymized)
+      description: Which processing systems are affected (users-app, orders, ai-service, ...).
+    validations:
+      required: true

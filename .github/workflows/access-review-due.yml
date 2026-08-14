@@ -1,0 +1,41 @@
+name: Access review due
+
+# Quarterly: opens the access-review task (repo, Vault, cloud IAM) and keeps
+# it tracked until sign-off is recorded in audits/access-reviews/.
+
+on:
+  schedule:
+    # Jan 2, Apr 1, Jul 1, Oct 1 at 07:00 UTC
+    - cron: "0 7 2 1,4,7,10 *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  access-review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Open quarterly access review
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          QUARTER="$(date +%Y)-Q$(( ($(date +%-m) - 1) / 3 + 1 ))"
+          gh issue create \
+            --title "Quarterly access review ${QUARTER}" \
+            --label "access-review,audit" \
+            --body "$(cat <<'EOF'
+          ## Quarterly access review (policies/03-access-control.md)
+
+          - [ ] GitHub org + repository access (joiner/mover/leaver drift)
+          - [ ] Vault token/policy inventory
+          - [ ] Cloud IAM (GCP) service accounts + human roles
+          - [ ] Bitrix24 / support tooling accounts
+          - [ ] Leavers since last review — access revoked, logged
+          - [ ] Evidence filed: audits/access-reviews/ (reviewer + date + sign-off)
+
+          **Closure criteria:** signed review record merged under audits/access-reviews/.
+          EOF
+          )"

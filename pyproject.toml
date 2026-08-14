@@ -1,0 +1,25 @@
+[project]
+name = "jol-m-compliance"
+version = "0.1.0"
+description = "Compliance governance (GDPR / ISO 27001 / SOC 2) for the Journey Of Life marketplace"
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "Proprietary — all rights reserved" }
+# Scripts are stdlib-only by design: no runtime supply chain in the evidence repo.
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    "pre-commit>=3.7",
+]
+
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+py-modules = ["main"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"

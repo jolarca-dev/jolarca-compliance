@@ -1,0 +1,41 @@
+name: Evidence integrity
+
+# Weekly: recomputes SHA-256 of finalized evidence and verifies it matches
+# audits/evidence-registry.csv. Any mismatch is treated as tampering until
+# proven otherwise and opens a Critical incident issue.
+
+on:
+  schedule:
+    - cron: "0 4 * * 3"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Verify evidence hashes
+        id: verify
+        run: |
+          python scripts/evidence-hash.py --verify --machine > /tmp/verify.txt \
+            && echo "ok=1" >> "$GITHUB_OUTPUT" \
+            || echo "ok=0" >> "$GITHUB_OUTPUT"
+          cat /tmp/verify.txt
+      - name: Open tampering incident if mismatch
+        if: steps.verify.outputs.ok == '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue create \
+            --title "CRITICAL: evidence integrity check failed" \
+            --label "incident,critical" \
+            --body "$(printf 'Weekly evidence-integrity verification failed.\n\n```\n%s\n```\nFollow policies/06-incident-response.md — this is a Critical class event until cleared by the DPO.' "$(cat /tmp/verify.txt)")"

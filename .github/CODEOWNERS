@@ -1,0 +1,29 @@
+# Compliance governance requires dual control: DPO + compliance lead.
+# Order matters: last matching pattern wins.
+
+*                                   @journeyoflife-org/compliance-leads
+
+# GDPR core artifacts — DPO is mandatory
+/policies/                          @journeyoflife-org/dpo @journeyoflife-org/compliance-leads
+/dpia/                              @journeyoflife-org/dpo @journeyoflife-org/compliance-leads
+/ropa/                              @journeyoflife-org/dpo @journeyoflife-org/compliance-leads
+/lawful-basis/                      @journeyoflife-org/dpo @journeyoflife-org/compliance-leads
+
+# Legal texts and retention rules
+/legal/                             @journeyoflife-org/dpo @journeyoflife-org/legal
+/docs/retention-schedule.md         @journeyoflife-org/dpo @journeyoflife-org/legal
+
+# Evidence integrity & audit surface
+/audits/                            @journeyoflife-org/compliance-leads
+/certifications/                    @journeyoflife-org/compliance-leads
+/vendor-assessments/                @journeyoflife-org/dpo @journeyoflife-org/compliance-leads
+
+# Incidents and DSRs
+/incidents/                         @journeyoflife-org/dpo @journeyoflife-org/compliance-leads
+/data-subject-requests/             @journeyoflife-org/dpo
+
+# Repo-level controls must not change without both owners
+/.github/                           @journeyoflife-org/dpo @journeyoflife-org/compliance-leads
+/scripts/                           @journeyoflife-org/compliance-leads
+Makefile                            @journeyoflife-org/compliance-leads
+.pre-commit-config.yaml             @journeyoflife-org/compliance-leads

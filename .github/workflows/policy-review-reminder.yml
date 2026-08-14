@@ -1,0 +1,36 @@
+name: Policy review reminder
+
+# Monthly: opens issues for policies nearing their annual review date.
+
+on:
+  schedule:
+    - cron: "0 7 1 * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  remind:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Find policies due within 30 days
+        id: due
+        run: |
+          python scripts/policy-review-dates.py --max-days 30 --machine > /tmp/due.txt
+          cat /tmp/due.txt
+          echo "count=$(grep -c '^DUE' /tmp/due.txt || true)" >> "$GITHUB_OUTPUT"
+      - name: Open review issue
+        if: steps.due.outputs.count != '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue create \
+            --title "Annual policy review due (monthly reminder)" \
+            --label "policy-change,review-due" \
+            --body "$(cat /tmp/due.txt)"

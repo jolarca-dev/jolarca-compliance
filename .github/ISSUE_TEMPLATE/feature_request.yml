@@ -1,0 +1,24 @@
+name: Feature request
+description: Improvement to compliance tooling or governance process
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposal
+      description: What should change and why.
+    validations:
+      required: true
+  - type: dropdown
+    id: framework
+    attributes:
+      label: Framework relevance
+      multiple: true
+      options: [GDPR, ISO 27001, SOC 2, PCI DSS, N/A]
+    validations:
+      required: true
+  - type: textarea
+    id: control
+    attributes:
+      label: Affected control / register
+      description: e.g. Annex A.8.2, CC7.2, ropa/master-register.csv

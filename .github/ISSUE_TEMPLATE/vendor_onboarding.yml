@@ -1,0 +1,45 @@
+name: Vendor onboarding
+description: New vendor/processor intake. Forces DPA + transfer assessment checklist.
+title: "VENDOR: "
+labels: ["vendor", "procurement"]
+body:
+  - type: input
+    id: vendor
+    attributes:
+      label: Vendor legal name + jurisdiction
+      placeholder: "Acme UAB, Lithuania (EU)"
+    validations:
+      required: true
+  - type: dropdown
+    id: role
+    attributes:
+      label: Data role
+      options: [Processor, Joint controller, Independent controller, No personal data]
+    validations:
+      required: true
+  - type: textarea
+    id: data
+    attributes:
+      label: Personal data shared (categories, volume, sensitivity)
+    validations:
+      required: true
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Mandatory checklist (cannot onboard without completion)
+      options:
+        - label: Security questionnaire completed and filed in vendor-assessments/<vendor>/
+        - label: DPA signed or on GDPR Art. 28 SCC basis — link pending
+        - label: Transfer Impact Assessment done (required for any non-EU transfer)
+        - label: Sub-processor list reviewed
+        - label: Entry added to vendor-assessments/register.md + register.csv
+        - label: RoPA updated (ropa/master-register.csv)
+    validations:
+      required: true
+  - type: dropdown
+    id: transfer
+    attributes:
+      label: Data transfer outside EU/EEA?
+      options: ["No", "Yes — adequacy decision", "Yes — SCCs + TIA", "Yes — other"]
+    validations:
+      required: true

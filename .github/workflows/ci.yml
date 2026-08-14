@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Markdown lint
+        run: npx --yes markdownlint-cli2 "**/*.md" "#.venv" "#node_modules" || true
+      - name: YAML validation
+        run: |
+          python -m pip install --quiet pyyaml
+          python - <<'EOF'
+          import glob, yaml, sys
+          bad = []
+          for p in glob.glob("**/*.y*ml", recursive=True):
+              if ".venv" in p or "node_modules" in p:
+                  continue
+              try:
+                  list(yaml.safe_load_all(open(p, encoding="utf-8")))
+              except Exception as e:
+                  bad.append(f"{p}: {e}")
+          if bad:
+              print("\n".join(bad)); sys.exit(1)
+          print("YAML OK")
+          EOF
+      - name: PII redaction scan
+        run: python scripts/redact-pii.py --all

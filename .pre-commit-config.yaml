@@ -1,0 +1,33 @@
+# Compliance hardening on top of template baseline.
+# gitleaks: PII/secret patterns in evidence MUST be redacted before commit.
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-added-large-files
+        args: ["--maxkb=512"]
+      - id: detect-private-key
+      - id: forbid-submodules
+
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.18.4
+    hooks:
+      - id: gitleaks
+
+  - repo: local
+    hooks:
+      - id: redact-pii
+        name: Flag unredacted personal data in drafts
+        entry: .venv/bin/python scripts/redact-pii.py
+        language: system
+        types: [text]
+        files: '(incidents|data-subject-requests|audits|dpia)/.*\.(md|csv|txt)$'
+
+      - id: markdownlint
+        name: markdownlint-cli2
+        entry: npx --yes markdownlint-cli2
+        language: system
+        types: [markdown]

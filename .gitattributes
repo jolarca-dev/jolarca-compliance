@@ -1,0 +1,11 @@
+# Deterministic history & hashing: enforce LF everywhere.
+* text=auto eol=lf
+
+# Signed originals: Git LFS pointers in git, binaries in the evidence vault.
+*.pdf filter=lfs diff=lfs merge=lfs -text
+*.png filter=lfs diff=lfs merge=lfs -text
+*.jpg filter=lfs diff=lfs merge=lfs -text
+
+# Registers and evidence registry must diff cleanly.
+*.csv text eol=lf
+*.md text eol=lf

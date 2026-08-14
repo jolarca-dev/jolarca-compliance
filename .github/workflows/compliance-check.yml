@@ -1,0 +1,27 @@
+name: Compliance check
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  governance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Evidence hash verification
+        run: python scripts/evidence-hash.py --verify
+      - name: Policy review dates (fail if overdue > 14 days)
+        run: python scripts/policy-review-dates.py --max-days 14
+      - name: Vendor re-assessment dates
+        run: python scripts/vendor-review-dates.py --max-days 30
+      - name: DSR SLA report (informational)
+        run: python scripts/dsr-sla-report.py data-subject-requests/register.md

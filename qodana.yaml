@@ -1,0 +1,13 @@
+# Qodana static analysis — inherited from jol-repo-template, compliance-tuned.
+# Secret/PII scanning is handled by gitleaks + scripts/redact-pii.py (blocking
+# in pre-commit and CI); Qodana covers code quality of scripts/ and main.py.
+version: "1.0"
+linter: jetbrains/qodana-python:latest
+profile:
+  name: qodana.recommended
+exclude:
+  - name: All
+    paths:
+      - .venv
+      - node_modules
+failThreshold: 0
