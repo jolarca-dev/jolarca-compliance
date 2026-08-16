@@ -1,1 +1,10 @@
 path,sha256,registered_at,registered_by,gate,control_ref,status
+audits/gate-evidence/G3-payments/reports/STEP17_AUDIT.md,86f028d28a74c954911edec023406ad5b5a0f7de4b297f0171b0e3dc370c9f08,2026-08-17,step-22c-reaudit,G3,SAQ-A-scope,sealed
+audits/gate-evidence/G3-payments/reports/STEP22_REAUDIT.md,91fa1a75cafc1fed58eed65563d6bf6ef8ae85f156bf1fc1789625059d9a0a2c,2026-08-17,step-22c-reaudit,G3,SAQ-A-scope,sealed
+audits/gate-evidence/G3-payments/reports/STEP22B_FINAL_REAUDIT.md,e1b9ed55b5f7f27798c9dd686190d53bec01b01e4821a57b6296f079e4c48bec,2026-08-17,step-22c-reaudit,G3,SAQ-A-scope,sealed
+audits/gate-evidence/G3-payments/reports/STEP22C_FINAL_REAUDIT.md,b91c8556a5b5e99d24109d3cad3d4ea8cf179c9c9a3689522bff8d14e291dbed,2026-08-17,step-22c-reaudit,G3,SAQ-A-scope,sealed
+audits/gate-evidence/G3-payments/reports/STEP18_EXECUTED.md,df1c3c1115ca55a8727c69c32072436f2ce3a80c58bb2fff3ffddc48465790b7,2026-08-17,step-22c-reaudit,G3,remediation-evidence,sealed
+audits/gate-evidence/G3-payments/reports/STEP19_EXECUTED.md,4f569ed3e54625c306e4ab72377436a793fd08c740c9c2c2cec6291c5e2051bd,2026-08-17,step-22c-reaudit,G3,remediation-evidence,sealed
+audits/gate-evidence/G3-payments/reports/STEP20_EXECUTED.md,804647f9db3ea333ad811b92ee3bccd21aa374cd07e03330c1b985c7e57909c9,2026-08-17,step-22c-reaudit,G3,remediation-evidence,sealed
+audits/gate-evidence/G3-payments/reports/STEP21_EXECUTED.md,374cd08614644051e59f5d76824b679cdc65a2ce4824a5a26b6cd438d1023334,2026-08-17,step-22c-reaudit,G3,remediation-evidence,sealed
+audits/gate-evidence/G3-payments/reports/EXECUTION_BUNDLE_18-21.md,9cb357f84d98b2609917d627d93bd92eaa53cd8196656789fd961244951bb1cd,2026-08-17,step-22c-reaudit,G3,remediation-evidence,sealed

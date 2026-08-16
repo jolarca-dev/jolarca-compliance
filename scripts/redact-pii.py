@@ -28,8 +28,10 @@ PATTERNS = {
     "email": re.compile(r"\b[\w.+-]+@[\w-]+(?:\.[\w-]+)*\.[A-Za-z]{2,}\b"),
     # IBAN (country check digits + 11–30 alnum)
     "iban": re.compile(r"\b[A-Z]{2}\d{2}[A-Z0-9]{11,30}\b"),
-    # LT/EE 11-digit personal identification codes
-    "personal-code-11": re.compile(r"(?<![\d-])\d{11}(?![\d-])"),
+    # LT/EE 11-digit personal identification codes (first digit is the
+    # gender-century marker 1–6; requiring it avoids false positives on
+    # digit runs inside sha256 evidence hashes)
+    "personal-code-11": re.compile(r"(?<![\d-])[1-6]\d{10}(?![\d-])"),
     # LV personal code dddddd-ddddd
     "personal-code-lv": re.compile(r"(?<!\d)\d{6}-\d{5}(?!\d)"),
     # card-like PAN (13–19 digits, optionally spaced)
