@@ -1,8 +1,9 @@
 # Qodana static analysis — inherited from jol-repo-template, compliance-tuned.
-# Secret/PII scanning is handled by gitleaks + scripts/redact-pii.py (blocking
-# in pre-commit and CI); Qodana covers code quality of scripts/ and main.py.
+# Community linter: runs fully local (no Qodana Cloud token), matching the
+# minimal-supply-chain stance of this evidence repo.
+# Local run: make qodana   (or: qodana scan --image jetbrains/qodana-python-community:2026.1)
 version: "1.0"
-linter: jetbrains/qodana-python:latest
+linter: jetbrains/qodana-python-community:2026.1
 profile:
   name: qodana.recommended
 exclude:

@@ -1,7 +1,7 @@
 # jol-m-compliance — verification & integrity targets
 PYTHON ?= .venv/bin/python
 
-.PHONY: check lint-docs verify-signatures hash-evidence sla-report redact-check
+.PHONY: check lint-docs verify-signatures hash-evidence sla-report redact-check qodana
 
 ## Full static verification gate (must pass before merge).
 ## Review-currency gates are enforced hard (audit finding F-01): no silent bypass.
@@ -29,3 +29,7 @@ sla-report:
 ## Fail if staged drafts contain unredacted personal data patterns
 redact-check:
 	$(PYTHON) scripts/redact-pii.py --all
+
+## Qodana Python static analysis (community linter, fully local; failThreshold 0)
+qodana:
+	qodana scan --image jetbrains/qodana-python-community:2026.1 --results-dir /tmp/qodana-results

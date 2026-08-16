@@ -14,13 +14,14 @@ import csv
 import sys
 from datetime import date
 from pathlib import Path
+from typing import Optional
 
 REPO = Path(__file__).resolve().parent.parent
 BASE = REPO / "vendor-assessments"
 REGISTER = BASE / "register.csv"
 
 
-def as_date(value: str) -> date | None:
+def as_date(value: str) -> Optional[date]:
     try:
         return date.fromisoformat(value.strip())
     except (ValueError, AttributeError):

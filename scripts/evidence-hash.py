@@ -52,7 +52,8 @@ def load_registry() -> list[dict[str, str]]:
     if not REGISTRY.is_file():
         return []
     with REGISTRY.open(newline="", encoding="utf-8") as fh:
-        return list(csv.DictReader(fh))
+        rows = list(csv.DictReader(fh))
+    return rows
 
 
 def save_registry(rows: list[dict[str, str]]) -> None:
