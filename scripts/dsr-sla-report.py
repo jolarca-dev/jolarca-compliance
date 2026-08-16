@@ -15,12 +15,12 @@ from pathlib import Path
 
 def parse_rows(text: str) -> list[dict[str, str]]:
     rows: list[dict[str, str]] = []
-    header: list[str] | None = None
+    header: list[str] = []
     for line in text.splitlines():
         if not line.strip().startswith("|"):
             continue
         cells = [c.strip() for c in line.strip().strip("|").split("|")]
-        if header is None:
+        if not header:
             header = [c.lower() for c in cells]
             continue
         if all(set(c) <= {"-", ":", " "} for c in cells):
@@ -31,7 +31,7 @@ def parse_rows(text: str) -> list[dict[str, str]]:
     return rows
 
 
-def as_date(value: str) -> date | None:
+def as_date(value: str) -> Optional[date]:
     try:
         return date.fromisoformat(value.strip())
     except (ValueError, AttributeError):
