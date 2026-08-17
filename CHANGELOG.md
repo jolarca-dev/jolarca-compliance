@@ -6,6 +6,15 @@ policy change, register mutation, and evidence finalization must appear here.
 
 ## [Unreleased]
 
+### Changed
+
+- compliance: STEP 26 regulatory baseline corrections (`STEP26_CORRECTIONS.md`):
+  retention schedule rewritten as per-country matrix (LT 10y accounting +
+  up-to-50y payroll as distinct classes; LV/EE counsel-to-confirm); i.SAF
+  FR0600 registered as recurring obligation OBL-001 with owner + calendar
+  (jol-m-data issue #4 for the export); Stripe AoC retrieval procedure and
+  self-authored TIA restated everywhere; RSK-002 annotated, RSK-015 added.
+
 ### Added
 
 - audits: detailed internal audit program plan (`audits/audit-plan-2026.md`).

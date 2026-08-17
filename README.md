@@ -55,6 +55,7 @@ governance of the Journey Of Life marketplace platform (LT / LV / EE markets).
 | DSR response (Art. 12) | 30 days; DPO paged at day 21 | `dsr-sla-monitor.yml` |
 | Policy annual review | review date + 14 days | `policy-review-reminder.yml` |
 | Vendor re-assessment | annual | `vendor-review-due.yml` |
+| i.SAF FR0600 filing (LT) | monthly, by the 20th (nil report included) | `docs/regulatory-obligations.md` OBL-001 |
 | Access review | quarterly | `access-review-due.yml` |
 | Critical CVE fix | ≤ 7 days | `policies/08-secure-development.md` |
 

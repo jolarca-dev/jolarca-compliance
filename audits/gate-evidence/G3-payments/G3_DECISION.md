@@ -18,8 +18,8 @@ of PCI scope; the scope statement is upgraded CONDITIONAL → PROVEN.
 | # | Item | Owner | Class |
 |---|---|---|---|
 | 1 | DPIA 003 signed + hash (currently draft skeleton) | DPO | compliance |
-| 2 | VIES VAT reconciliation evidence | Compliance/Legal | compliance |
-| 3 | Stripe TIA + AoC link in vendor register ("onboarding — artifacts pending") | Compliance | compliance |
+| 2 | VIES VAT reconciliation evidence (i.SAF FR0600 source data included — see `docs/regulatory-obligations.md` OBL-001; corrected source map: STEP 26) | Compliance/Legal | compliance |
+| 3 | Stripe TIA (JOL-self-authored) + AoC in vendor register — retrieval procedure corrected 2026-08-17 (STEP 26 C3): AoC = Stripe Dashboard → Compliance Settings, else support request; NOT a public download | Compliance | compliance |
 | 4 | RSK-013: contract suite wired into jol-m-marketplace CI as a REQUIRED check (boundary repo currently ungated) | Marketplace | engineering |
 | 5 | RSK-014: internal refund endpoint wired to PSP-side execution | Marketplace | engineering |
 | 6 | RSK-012: E3 rows deployed on the hub production k8s plane | Infra | engineering (gates hub production go-live, not the donation itself) |
@@ -41,3 +41,7 @@ Any item closing requires evidence committed under this directory and a
 note in `audits/evidence-registry.csv`. Any invalidation trigger from
 the scope statement (Stripe footprint outside the boundary) re-opens G3
 immediately.
+
+> **STEP 26 note (2026-08-17):** withheld rows 2–3 now reference the corrected
+> procedures/sources in `STEP26_CORRECTIONS.md` (C1/C3). Evidence gathering
+> itself still happens in Step 25b; this step fixes the map it follows.
