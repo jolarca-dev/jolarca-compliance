@@ -1,0 +1,12 @@
+{
+  "records": [
+    {"id": "INV-2015-LT", "class": "RC-ACCT-10Y", "country": "LT", "anchor_date": "2015-06-30",
+     "fields": {"customer_name": "Aiste Sintetine", "email": "aiste@example.test",
+                "national_id": "SYN-1234560", "iban": "LT00SYNTHETIC0001",
+                "amount": "120.00", "currency": "EUR", "vat_rate": "21",
+                "document_date": "2015-06-30", "document_no": "FA-2015-0042"}},
+    {"id": "ACC-2020-LT", "class": "RC-ACCOUNT", "country": "LT", "anchor_date": "2020-06-01",
+     "fields": {"name": "Frida Sintetine", "email": "frida@example.test",
+                "password_hash": "pbkdf2$synthetic$0000", "phone": "+370 000 00001"}}
+  ]
+}
