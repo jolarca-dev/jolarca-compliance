@@ -1,0 +1,12 @@
+# JOL-M Marketplace — SOPS creation rules (ADR-003 amendment, PR #35; Gate 7)
+# TREE: Marketplace (/opt/jol-m/**) — recipient age-jolm ONLY.
+# Cross-tree recipients are a segregation incident (amendment rule 1).
+# Private key: Vaultwarden SOPS-Custody (authoritative) + Shamir custody.
+# Church-tree counterpart: jol-infrastructure .sops.yaml (PR #43).
+creation_rules:
+  - path_regex: \.enc\.ya?ml$
+    age: age1h6knxanpsq332ufrh54mh5y0wgzhu43vgq8flh55hrnc2zvuwe8qjn4n47
+  - path_regex: \.enc\.json$
+    age: age1h6knxanpsq332ufrh54mh5y0wgzhu43vgq8flh55hrnc2zvuwe8qjn4n47
+  - path_regex: ^secrets/encrypted/
+    age: age1h6knxanpsq332ufrh54mh5y0wgzhu43vgq8flh55hrnc2zvuwe8qjn4n47
