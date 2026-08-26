@@ -1,0 +1,138 @@
+# Retention matrix — machine-readable single source of truth.
+#
+# Human/legal source: docs/retention-schedule.md (STEP 26 per-country matrix).
+# Every retention job (prod + warehouse) reads THIS file; nothing is hardcoded
+# in job code. Doctrine: anonymize-don't-delete (ADR-0001) + legal-hold guard.
+#
+# Mode resolution (enforced by retention/matrix.py, not trusted from here):
+#   effective mode = report-only  whenever counsel_status != "confirmed",
+#   or period is unset, or hold_release is pending. Destructive actions on
+#   unconfirmed classes are impossible by construction.
+
+version: 1
+as_of: "2026-08-17"
+doctrine:
+  source: docs/retention-schedule.md
+  adr: docs/adr/ADR-0001-anonymize-dont-delete.md
+  hold_guard: step27          # every job consults the hold guard BEFORE acting
+  unconfirmed_default: report-only
+
+classes:
+
+  RC-ACCT-10Y:
+    description: Accounting/financial documents — orders, invoices, payment refs
+    action: anonymize-dont-delete     # anonymize residual PII, retain fiscal substance
+    pii_fields: [customer_name, email, national_id, iban]
+    retain_fields: [amount, currency, vat_rate, document_date, document_no]
+    domain: [prod, warehouse]
+    countries:
+      LT:
+        period_years: 10
+        counsel_status: confirmed
+        source: Law on Accounting of the Republic of Lithuania
+        mode: active
+      LV: { period_years: null, counsel_status: pending, mode: report-only }
+      EE: { period_years: null, counsel_status: pending, mode: report-only }
+
+  RC-PAYROLL-50Y:
+    description: Employment-adjacent personal data in payout/verification records
+    action: anonymize-dont-delete
+    pii_fields: [worker_name, national_id, iban, birth_date]
+    retain_fields: [period, gross_amount, tax withheld]
+    domain: [prod, warehouse]
+    # Step 27: extended-hold class. Held per legal-hold guard; the job does NOT
+    # touch held records and runs report-only until counsel releases the class.
+    countries:
+      LT:
+        period_years: 50
+        counsel_status: pending-scope   # instrument + record scope unconfirmed
+        step27_hold: true
+        mode: report-only
+      LV: { period_years: null, counsel_status: pending, mode: report-only }
+      EE: { period_years: null, counsel_status: pending, mode: report-only }
+
+  RC-ACCOUNT:
+    description: Identity, contact, auth (session/profile data)
+    action: hard-delete
+    pii_fields: [name, email, password_hash, phone]
+    domain: [prod, warehouse]
+    horizon: account_end_plus_years
+    countries:
+      LT: { period_years: 2, counsel_status: confirmed-limitation, source: contractual limitation period, mode: active }
+      LV: { period_years: 2, counsel_status: pending, mode: report-only }
+      EE: { period_years: 2, counsel_status: pending, mode: report-only }
+
+  RC-KYC:
+    description: Seller verification dossiers
+    action: anonymize-dont-delete
+    pii_fields: [seller_name, national_id, document_no, iban]
+    retain_fields: [offboarding_date, kyc_outcome]
+    domain: [prod, warehouse]
+    horizon: offboarding_plus_years
+    countries:
+      LT: { period_years: 5, counsel_status: confirmed-operational, source: operational policy over AML baseline, mode: active }
+      LV: { period_years: 5, counsel_status: pending, mode: report-only }
+      EE: { period_years: 5, counsel_status: pending, mode: report-only }
+
+  RC-AI:
+    description: LLM prompts/outputs
+    action: hard-delete
+    pii_fields: [prompt_text, output_text]
+    domain: [prod]
+    horizon: created_plus_days
+    countries:
+      ALL: { period_days: 30, counsel_status: confirmed, source: purpose limitation, mode: active }
+
+  RC-LOCATION:
+    description: Geolocation history
+    action: hard-delete
+    pii_fields: [lat, lon, user_id]
+    domain: [prod]
+    horizon: created_plus_days
+    countries:
+      ALL: { period_days: 90, counsel_status: confirmed, source: consent scope, mode: active }
+
+  RC-SUPPORT:
+    description: Support cases
+    action: hard-delete
+    pii_fields: [requester_name, email, case_body]
+    domain: [prod, warehouse]
+    horizon: closure_plus_years
+    countries:
+      ALL: { period_years: 3, counsel_status: confirmed, source: legitimate interest (LIA), mode: active }
+
+  RC-LOGS:
+    description: Audit logs
+    action: archive-then-delete
+    pii_fields: [actor_id]
+    domain: [prod, warehouse]
+    horizon: created_plus_years
+    countries:
+      ALL: { period_years: 5, counsel_status: confirmed, source: ISO A.8.15 / forensics, mode: active }
+
+  RC-MARKETING-CONSENT:
+    description: Marketing consent records after withdrawal/expiry
+    action: hard-delete
+    pii_fields: [email, phone, consent_payload]
+    retain_fields: [consent_version, withdrawn_at]   # proof of withdrawal survives
+    domain: [prod]
+    horizon: withdrawal_plus_years
+    countries:
+      LT: { period_years: 2, counsel_status: pending, mode: report-only }
+      LV: { period_years: 2, counsel_status: pending, mode: report-only }
+      EE: { period_years: 2, counsel_status: pending, mode: report-only }
+
+  RC-DSR-VERIFY:
+    description: DSR identity-verification material
+    action: hard-delete
+    horizon: immediate_after_verification
+    domain: [prod]
+    countries:
+      ALL: { period_days: 0, counsel_status: confirmed, source: GDPR Art. 12(6), mode: active }
+
+  RC-EVIDENCE:
+    description: Finalized compliance evidence
+    action: never-delete
+    domain: [prod, warehouse, compliance-repo]
+    countries:
+      ALL: { period_years: null, counsel_status: confirmed, source: audit defense, mode: active }

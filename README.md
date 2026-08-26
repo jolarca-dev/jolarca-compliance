@@ -33,6 +33,7 @@ governance of the Journey Of Life marketplace platform (LT / LV / EE markets).
 | `certifications/` | SOC 2 Type 1, ISO 27001, PCI DSS SAQ-A tracks |
 | `legal/` | Versioned legal texts per language, imprint |
 | `risk-register/` | Risk register + treatment plans |
+| `retention/` | Retention-as-code: matrix config, jobs, hold guard, adversarial proofs (STEP 30) |
 | `training/` | Program materials + completion log |
 | `docs/` | Compliance matrix, retention schedule, regulatory contacts, ADRs |
 | `scripts/` | Integrity + SLA automation (see Makefile) |

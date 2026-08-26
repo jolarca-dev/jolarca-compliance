@@ -1,0 +1,41 @@
+name: Retention proof gate
+
+# Daily proof that the retention engine still proves what it claims:
+# the full test suite (hold-guard, report-only, adversarial, propagation,
+# missed-run) must stay green. Production scheduling of the actual jobs
+# lives with the platform scheduler (CronJob); this workflow is the
+# always-on evidence that the code remains audit-worthy.
+
+on:
+  schedule:
+    - cron: "0 3 * * *"
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  retention-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install PyYAML
+        run: python -m pip install --quiet pyyaml
+      - name: Retention engine test suite
+        run: python -m unittest retention.tests.test_retention -v
+      - name: Adversarial verifier self-check (CLI path)
+        run: python retention/verify_anonymization.py --help
+      - name: Open incident if retention proofs break
+        if: failure()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue create \
+            --title "Retention proof gate FAILED — engine tests red" \
+            --label "incident" \
+            --body "The retention engine test suite (hold-guard, report-only, adversarial anonymization, warehouse propagation, missed-run alerting) failed on ${{ github.ref_name }} @ ${{ github.sha }}. Retention is an executed legal obligation: restore the proof gate before the next scheduled run."

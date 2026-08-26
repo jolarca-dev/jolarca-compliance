@@ -1,0 +1,8 @@
+[
+  {"record_id": "INV-2014-LT-HELD", "hold_id": "HLD-2026-001",
+   "reason": "Active litigation — Step 27 hold", "placed_by": "legal@example.test",
+   "placed_at": "2026-07-01", "released_at": null},
+  {"record_id": "PAY-1990-LT-HELD", "hold_id": "HLD-2026-002",
+   "reason": "Pension-records inquiry — Step 27 hold", "placed_by": "legal@example.test",
+   "placed_at": "2026-07-01", "released_at": null}
+]

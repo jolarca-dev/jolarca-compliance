@@ -1,0 +1,4 @@
+# Retention run artifacts (audit trails, scheduler state, key custody).
+# Keys MUST stay out of git — production custody is Vault (policy 04).
+*
+!.gitignore
