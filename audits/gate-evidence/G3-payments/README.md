@@ -8,8 +8,10 @@ Immutable once the gate passes. Required artifacts:
       — PROVEN 2026-08-17, STEP 22c (`reports/STEP22C_FINAL_REAUDIT.md` C3/C4)
 - [ ] VAT reconciliation evidence (VIES validation flow) — OPEN (RSK-011)
 - [ ] DPIA 003 signed + hash — OPEN (`dpia/003-payments-and-vat`: draft)
-- [ ] Stripe TIA + AoC link recorded in vendor register — OPEN
-      (`vendor-assessments/stripe`: onboarding, artifacts pending)
+- [ ] Stripe TIA (JOL-self-authored) + AoC (Stripe Dashboard → Compliance
+      Settings, else support request) recorded in vendor register — OPEN
+      (`vendor-assessments/stripe`: onboarding, artifacts pending).
+      Retrieval procedure corrected 2026-08-17 — `STEP26_CORRECTIONS.md` C3.
 
 Gate status 2026-08-17: **CONDITIONAL CLEARANCE** — payment-boundary
 controls cleared; first-real-donation authorization withheld. See

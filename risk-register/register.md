@@ -5,7 +5,7 @@ Reviewed at every gate and quarterly. See `README.md` for scoring model.
 | ID | Risk | Likelihood | Impact | Score | Treatment | Owner | Status | Review |
 |---|---|---|---|---|---|---|---|---|
 | RSK-001 | LLM vendor receives personal data via egress path | 3 | 4 | 12 | PII pre-filter + allowlist + TIAs (G2 evidence) | Platform | open | 2026-11-15 |
-| RSK-002 | Baltic retention obligations conflict with erasure requests | 2 | 4 | 8 | Anonymize-don't-delete pattern (ADR-0001) | DPO | open | 2026-11-15 |
+| RSK-002 | Baltic retention obligations conflict with erasure requests. **Annotation 2026-08-17 (STEP 26):** prior flat "10y" framing corrected — Lithuania has two distinct statutory classes (10y accounting; up-to-50y payroll/personnel-adjacent); LV/EE `[COUNSEL-TO-CONFIRM]`. See `docs/retention-schedule.md` §2 | 2 | 4 | 8 | Anonymize-don't-delete pattern (ADR-0001, amended) + per-country matrix; RC-PAYROLL-50Y candidates carry do-not-delete flag, DPO review | DPO | open | 2026-11-15 |
 | RSK-003 | Vendor DPA gap during onboarding rush | 2 | 4 | 8 | Onboarding checklist as merge gate; register parity check | Compliance | open | 2026-11-15 |
 | RSK-004 | Evidence integrity undetected tampering | 1 | 5 | 5 | Weekly hash verification + branch protection + audit log | Compliance | open | 2026-11-15 |
 | RSK-005 | DSR clock breach due to unverified identity loop | 2 | 3 | 6 | Verification SLA (5 days) + day-21 paging | DPO | open | 2026-11-15 |
@@ -18,6 +18,7 @@ Reviewed at every gate and quarterly. See `README.md` for scoring model.
 | RSK-012 | E3 proven at mechanism level only (staging plane); no GKE/k8s production deployment exists, so network denial is not yet enforced where hub would run in production | 2 | 4 | 8 | Deploy E3 rows + N2 payment-API row with the hub production rollout; re-run e3-network-deny-test.sh on the cluster plane before hub production go-live | Infra | open | 2026-11-15 |
 | RSK-013 | Boundary repo (jol-m-marketplace) has NO required checks and the contract suite (tests/contract) is not wired into its CI — the contract guarantee rests on ad-hoc runs | 2 | 5 | 10 | Wire tests/contract into marketplace CI (compose parity topology) and set it required on main before first live donation | Marketplace | open | 2026-11-15 |
 | RSK-014 | Internal refund endpoint updates the boundary ledger (gates, partial accounting, idempotency proven) but does not invoke PSP-side refund execution; live money movement lands with PSP wiring | 2 | 3 | 6 | Wire RefundCreateView → services.refund (stripe.Refund.create) at live PSP wiring, test-mode first | Marketplace | open | 2026-11-15 |
+| RSK-015 | Missed/late i.SAF FR0600 monthly filing (nil reports included) — recurring obligations surface only when the penalty arrives | 2 | 3 | 6 | Registered as OBL-001 (`docs/regulatory-obligations.md`) with owner + calendar row; FR0600 export spec in jol-m-data; filing ledger append-only; penalties `[COUNSEL-TO-CONFIRM]` | Finance + Compliance | open | 2026-11-15 |
 
 Status values: `open`, `mitigating`, `accepted`, `closed`.
 Accepted risks require a signed acceptance note in the treatment plan.
