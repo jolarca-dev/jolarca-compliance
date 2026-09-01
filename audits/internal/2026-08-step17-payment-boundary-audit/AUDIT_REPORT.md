@@ -13,10 +13,10 @@
 The full audit with reproduced commands and outputs lives in the
 infrastructure repository (custody of the boundary's IaC/security docs):
 
-- `jol-m-infrastructure/STEP17_AUDIT.md`
+- `jolarca-infrastructure/STEP17_AUDIT.md`
 - sha256: `86f028d28a74c954911edec023406ad5b5a0f7de4b297f0171b0e3dc370c9f08`
 
-Verify: `sha256sum STEP17_AUDIT.md` in `jol-m-infrastructure` at the
+Verify: `sha256sum STEP17_AUDIT.md` in `jolarca-infrastructure` at the
 audited commit. Any divergence = evidence-tampering finding (RSK-004
 pattern).
 

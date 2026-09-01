@@ -2,15 +2,15 @@
 
 - **Issued:** 2026-08-17 (STEP 17 independent audit)
 - **Upgraded:** 2026-08-17 (STEP 22c independent re-audit) — CONDITIONAL → **PROVEN**
-- **Authority:** ADR-0005 (jol-m-infrastructure, ratified 2026-08-17),
+- **Authority:** ADR-0005 (jolarca-infrastructure, ratified 2026-08-17),
   ADR-0004 Amendment 1, `docs/payment-api-contract.md` v1
 - **Reconfirmation:** quarterly, with the PCI scope check in
-  `jol-m-infrastructure/security/pci-dss-scope.md` and the access review
+  `jolarca-infrastructure/security/pci-dss-scope.md` and the access review
 
 ## Scope statement — PROVEN
 
 SAQ-A scope is **the payment boundary only**: the `payments_app` of
-`jol-m-marketplace`, its data stores, and its network segment. It is the
+`jolarca`, its data stores, and its network segment. It is the
 sole Stripe integrator, the sole holder of Stripe credentials, and the
 sole receiver of Stripe webhooks.
 
@@ -50,7 +50,7 @@ closed and re-tested 2026-08-17).
    plane before hub runs as a production workload (no such deployment
    exists today; mechanism proof + manifests stand in).
 2. **RSK-013** — wire the contract suite (`tests/contract`) into
-   jol-m-marketplace CI as a required check; the boundary repo currently
+   jolarca CI as a required check; the boundary repo currently
    has no required checks.
 3. **RSK-014** — internal refund endpoint updates the boundary ledger but
    does not yet invoke PSP-side refund execution; due at live PSP wiring.
@@ -77,7 +77,7 @@ re-run the STEP 22c audit suite.
 
 - Re-audit of record:
   `audits/internal/2026-08-step22c-payment-boundary-reaudit/AUDIT_REPORT.md`
-- Canonical re-audit: `jol-m-infrastructure/STEP22C_FINAL_REAUDIT.md`
+- Canonical re-audit: `jolarca-infrastructure/STEP22C_FINAL_REAUDIT.md`
 - Prior audits: STEP 17 sha256 `86f028d2…c9f08`, STEP 22 sha256
   `91fa1a75…9a0a2c` (hash-verified unchanged 2026-08-17)
 - Hash-pinned evidence bundle:

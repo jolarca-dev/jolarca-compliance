@@ -56,7 +56,7 @@ Hub protection currently requires ZERO checks. Arming required contexts is
 executed at the END of STEP 19 (after the guard jobs exist and are green),
 because arming earlier would block this very merge and the guard PRs under
 `enforce_admins`. The required-context set is declared in
-`jol-m-infrastructure/docs/payment-boundary-enforcement.md`. Operational
+`jolarca-infrastructure/docs/payment-boundary-enforcement.md`. Operational
 application (not Terraform): hub is mission custody — ADR-0004 R1/R3/R4
 forbid the marketplace `github-org` module from managing it.
 

@@ -1,4 +1,4 @@
-# jol-m-compliance
+# jolarca-compliance
 
 **PRIVATE repository.** Single source of truth for GDPR / ISO 27001 / SOC 2 compliance
 governance of the Journey Of Life marketplace platform (LT / LV / EE markets).

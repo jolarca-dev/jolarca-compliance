@@ -10,7 +10,7 @@
 
 ## Canonical report
 
-- `jol-m-infrastructure/STEP22_REAUDIT.md`
+- `jolarca-infrastructure/STEP22_REAUDIT.md`
 - sha256: `91fa1a75cafc1fed58eed65563d6bf6ef8ae85f156bf1fc1789625059d9a0a2c`
 - Prior audit hash (unchanged): STEP17_AUDIT.md sha256
   `86f028d28a74c954911edec023406ad5b5a0f7de4b297f0171b0e3dc370c9f08`

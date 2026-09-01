@@ -5,12 +5,12 @@ steps. Steps marked **[BLOCKING]** gate the merge.
 
 ## 1. Rename repository → canonical `jol-compliance` (finding F-E1)
 
-1. GitHub → repo Settings → rename `jol-m-compliance` → `jol-compliance`
+1. GitHub → repo Settings → rename `jolarca-compliance` → `jol-compliance`
    (GitHub preserves redirects for clone/push).
 2. Local: `git remote set-url origin https://github.com/journeyoflife-org/jol-compliance.git`
 3. Update every cross-repo reference in the portfolio (jol-marketplace,
    jol-infrastructure, jol-legal, org docs) — grep each repo for
-   `jol-m-compliance`.
+   `jolarca-compliance`.
 4. Verify: `git ls-remote origin` resolves; redirects work for the old URL.
 
 ## 2. Replace CODEOWNERS placeholder teams — **[BLOCKING]** (finding F-D1)

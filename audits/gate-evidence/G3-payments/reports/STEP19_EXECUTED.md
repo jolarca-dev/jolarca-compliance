@@ -7,11 +7,11 @@
 ## What landed
 
 1. **Vendored E1 guard**: `scripts/check-payment-boundary.sh` — exact copy
-   of the jol-m-infrastructure record copy, sha256-pinned in the workflow:
+   of the jolarca-infrastructure record copy, sha256-pinned in the workflow:
    `8fa2dd12f12320dff268ee19d5b00422a1f5987203e34755c342e56068ed47a5`.
    Drift contract: guard updates land in BOTH repos in one change window;
    the pin is the tamper seal (record-copy contract,
-   jol-m-infrastructure/docs/payment-boundary-enforcement.md).
+   jolarca-infrastructure/docs/payment-boundary-enforcement.md).
 2. **New workflow** `.github/workflows/payment-boundary-guard.yml`
    (deliberately NO path filter — residue can land anywhere):
    - job `Payment Boundary Guard (E1, ADR-0005)`: pin check + guard run
