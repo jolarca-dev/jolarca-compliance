@@ -1,4 +1,4 @@
-# jol-m-compliance — verification & integrity targets
+# jolarca-compliance — verification & integrity targets
 PYTHON ?= .venv/bin/python
 
 .PHONY: check lint-docs verify-signatures hash-evidence sla-report redact-check qodana

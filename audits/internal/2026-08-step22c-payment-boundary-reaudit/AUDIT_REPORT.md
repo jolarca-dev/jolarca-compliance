@@ -2,7 +2,7 @@
 
 - **Date:** 2026-08-17
 - **Type:** independent internal audit (re-audit of STEP 17 scope)
-- **Canonical report:** `jol-m-infrastructure/STEP22C_FINAL_REAUDIT.md`
+- **Canonical report:** `jolarca-infrastructure/STEP22C_FINAL_REAUDIT.md`
   sha256 `b91c8556a5b5e99d24109d3cad3d4ea8cf179c9c9a3689522bff8d14e291dbed`
 - **Archived evidence:** `audits/gate-evidence/G3-payments/`
   (hash-pinned manifest + immutable report copies)

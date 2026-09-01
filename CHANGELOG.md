@@ -13,13 +13,13 @@ policy change, register mutation, and evidence finalization must appear here.
   all fixed and verified).
 - STEP 17 payment-boundary audit (Model A): archived gate evidence
   (`audits/internal/2026-08-step17-payment-boundary-audit/`, immutable,
-  sha256-pinned to the canonical `jol-m-infrastructure/STEP17_AUDIT.md`),
+  sha256-pinned to the canonical `jolarca-infrastructure/STEP17_AUDIT.md`),
   SAQ-A scope statement for the single payment boundary
   (`certifications/pci-dss/scope-statement-model-a.md`, PCI-DSS 12.5.2 /
   SOC 2 CC6.1 / ISO 27001 A.8.13 mapped), and residual risks RSK-006…
   RSK-011 (hub Model-B residue, unwired CI guards, undeployed E3,
   unimplemented internal API, refund edge cases, donation VAT/receipt
-  routed to jol-m-legal + tax advisor). Verdict: Model A NOT PROVEN yet
+  routed to jolarca-legal + tax advisor). Verdict: Model A NOT PROVEN yet
   — re-audit owed before the G3 gate.
 - STEP 22 payment-boundary RE-AUDIT (Model A): premise "Steps 18–21
   implemented" tested and REJECTED with reproduced evidence — no step

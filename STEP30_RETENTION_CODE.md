@@ -41,7 +41,7 @@ YAML still cannot go destructive.
 | RC-ACCOUNT, RC-SUPPORT, RC-MARKETING-CONSENT | same | marketplace DB | weekly |
 | RC-KYC, RC-ACCT-10Y, RC-PAYROLL-50Y, RC-LOGS | same | marketplace DB + warehouse-native | monthly |
 | RC-EVIDENCE | same | all domains | yearly (verification only) |
-| Warehouse propagation | `run_propagation` | warehouse (jol-m-data) | after every prod run (manifest-driven) |
+| Warehouse propagation | `run_propagation` | warehouse (jolarca-data) | after every prod run (manifest-driven) |
 
 ### Hold-guard integration (critical) — PROVEN
 
@@ -131,7 +131,7 @@ the proofs go red.
 
 1. **Prod adapters**: `JsonRecordStore` stands in for the marketplace DB and
    warehouse marts; the real adapters (Postgres erasure queries, dbt models
-   in jol-m-data) are the next step — the engine and proofs carry over.
+   in jolarca-data) are the next step — the engine and proofs carry over.
 2. **Key custody**: production key lives in Vault with two-person rule
    (policy 04); demo keys are ephemeral.
 3. **Counsel releases**: RC-PAYROLL-50Y goes active only when counsel scopes

@@ -20,7 +20,7 @@ of PCI scope; the scope statement is upgraded CONDITIONAL → PROVEN.
 | 1 | DPIA 003 signed + hash (currently draft skeleton) | DPO | compliance |
 | 2 | VIES VAT reconciliation evidence | Compliance/Legal | compliance |
 | 3 | Stripe TIA + AoC link in vendor register ("onboarding — artifacts pending") | Compliance | compliance |
-| 4 | RSK-013: contract suite wired into jol-m-marketplace CI as a REQUIRED check (boundary repo currently ungated) | Marketplace | engineering |
+| 4 | RSK-013: contract suite wired into jolarca CI as a REQUIRED check (boundary repo currently ungated) | Marketplace | engineering |
 | 5 | RSK-014: internal refund endpoint wired to PSP-side execution | Marketplace | engineering |
 | 6 | RSK-012: E3 rows deployed on the hub production k8s plane | Infra | engineering (gates hub production go-live, not the donation itself) |
 

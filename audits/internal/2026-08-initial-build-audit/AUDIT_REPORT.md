@@ -1,11 +1,11 @@
-# Initial Build Audit — jol-m-compliance ("The Evidence Vault")
+# Initial Build Audit — jolarca-compliance ("The Evidence Vault")
 
 | | |
 |---|---|
 | Audit ID | IA-2026-02 (initial build audit) |
 | Date | 2026-08-15 |
 | Audit team | Lead ISMS Auditor (ISO 27001:2022 / SOC 2) · Senior Data Protection Auditor (GDPR) · Staff DevSecOps Engineer |
-| Object | Local repository `jol-m-compliance`, branch `main` @ `d91701c`, plus uncommitted Qodana fixes |
+| Object | Local repository `jolarca-compliance`, branch `main` @ `d91701c`, plus uncommitted Qodana fixes |
 | Method | Evidence-first re-execution: every claim re-run; negative tests mandatory; no silent fixes |
 | Design basis | `JOL_Compliance_Repo_File_Tree.md` NOT present locally — audited against the structure documented in `README.md` + `CHANGELOG.md` |
 
@@ -80,7 +80,7 @@ unprovable — see F-A1.
 | F-B1 | B | **HIGH** | `ropa/by-system/bitrix24-crm.md` / `ropa/master-register.csv` | Claim: RoPA complete per Art. 30. Evidence: narrative exists with no ROPA ID; no register row; bidirectional parity broken | Assign ROPA-007, add register row, or document CRM processing under an existing entry with lawful basis | DPO |
 | F-A2 | A | MEDIUM | `legal/cookie-policy/README.md`, `legal/privacy-policy/README.md`, `audits/iso27001/README.md` | Claim: named artifacts exist (`banner-spec.md`, `cookie-policy.md`, `diff-log.md`, `soa.md`). Evidence: all four MISSING | Create stubs or remove the promises; no ADR justifies absence | Compliance lead |
 | F-A1 | A | MEDIUM | `qodana.yaml:1`, `docs/DPIA-template.md:3` vs git history | Claim: baseline "inherited from jol-repo-template". Evidence: history begins "Initial commit: PyCharm project scaffold"; no provenance artifact | Record template provenance (ADR or CHANGELOG note: which template commit was mirrored) | Compliance lead |
-| F-E1 | E | MEDIUM | Repo name | Claim (portfolio doctrine): canonical name `jol-compliance`. Evidence: repo is `jol-m-compliance` locally and on origin | Execute rename runbook (§ runbook step 1) | Org admin |
+| F-E1 | E | MEDIUM | Repo name | Claim (portfolio doctrine): canonical name `jol-compliance`. Evidence: repo is `jolarca-compliance` locally and on origin | Execute rename runbook (§ runbook step 1) | Org admin |
 | F-E2 | E | MEDIUM | `legal/**` | Claim (boundary doctrine): canonical legal texts live in `jol-legal/legal-texts/`; this repo holds references + consent ledger. Evidence: no full texts present (no current breach), but `legal/` READMEs are designed to store versioned full texts; zero references to `jol-legal` | Amend design: legal/ keeps version ledges & references only; texts move to jol-legal; add cross-references | DPO + legal |
 | F-D2 | D | MEDIUM | `README.md` access matrix vs `.github/CODEOWNERS:23` | Claim: "Compliance lead required reviewer on all registers". Evidence: `/data-subject-requests/` (holds the DSR register) owned by DPO only; last-match-wins overrides the `*` rule | Add compliance-leads to the DSR pattern, or amend the README claim | Compliance lead |
 | F-C2 | C | LOW | `.gitattributes` / `evidence-integrity.yml` | Claim: immutability via hashes. Evidence: hashes are over resolved bytes (correct with `lfs: true` checkout); any pointer-only checkout would verify as MISMATCH (false tamper alarm); LFS never initialized/demonstrated in this repo | Document LFS checkout requirement in audits/README; verify `git lfs install` state before first PDF evidence | DevSecOps |

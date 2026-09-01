@@ -1,4 +1,4 @@
-# Contributing to jol-m-compliance
+# Contributing to jolarca-compliance
 
 This repository has stricter rules than a code repository. Evidence integrity
 is the product.

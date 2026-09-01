@@ -14,9 +14,9 @@ Reviewed at every gate and quarterly. See `README.md` for scoring model.
 | RSK-008 | E3 network control undeployed; hostile hub→Stripe defense rests on credential absence, not topology | 2 | 4 | 8 | Deploy network-policy.md payment-boundary rows with the payment workstream; re-run hostile test against live boundary | Infra | closed | 2026-08-17 |
 | RSK-009 | Internal payment API (/internal/v1) unimplemented; hub donation flow dead-ended → schedule pressure to re-integrate Stripe directly in hub | 2 | 5 | 10 | Implement contract §2–§4 with product attribution + caller binding, gated by consumer-driven contract tests | Marketplace | closed | 2026-08-17 |
 | RSK-010 | Refund edge cases: hub refund view flips DB status only (no money movement via boundary); partial/duplicate-refund paths undefined | 2 | 3 | 6 | Route refunds through contract POST /internal/v1/refunds; define partial-refund + idempotent-replay behavior | Marketplace | closed | 2026-08-17 |
-| RSK-011 | Donation VAT/tax-receipt handling unresolved (receipt endpoints are stubs); recurring donations undesigned against contract v1 | 2 | 3 | 6 | Route VAT/receipt question to jol-m-legal + tax advisor (flagged, not assumed); recurring = contract amendment | Compliance/Legal | open | 2026-11-15 |
+| RSK-011 | Donation VAT/tax-receipt handling unresolved (receipt endpoints are stubs); recurring donations undesigned against contract v1 | 2 | 3 | 6 | Route VAT/receipt question to jolarca-legal + tax advisor (flagged, not assumed); recurring = contract amendment | Compliance/Legal | open | 2026-11-15 |
 | RSK-012 | E3 proven at mechanism level only (staging plane); no GKE/k8s production deployment exists, so network denial is not yet enforced where hub would run in production | 2 | 4 | 8 | Deploy E3 rows + N2 payment-API row with the hub production rollout; re-run e3-network-deny-test.sh on the cluster plane before hub production go-live | Infra | open | 2026-11-15 |
-| RSK-013 | Boundary repo (jol-m-marketplace) has NO required checks and the contract suite (tests/contract) is not wired into its CI — the contract guarantee rests on ad-hoc runs | 2 | 5 | 10 | Wire tests/contract into marketplace CI (compose parity topology) and set it required on main before first live donation | Marketplace | open | 2026-11-15 |
+| RSK-013 | Boundary repo (jolarca) has NO required checks and the contract suite (tests/contract) is not wired into its CI — the contract guarantee rests on ad-hoc runs | 2 | 5 | 10 | Wire tests/contract into marketplace CI (compose parity topology) and set it required on main before first live donation | Marketplace | open | 2026-11-15 |
 | RSK-014 | Internal refund endpoint updates the boundary ledger (gates, partial accounting, idempotency proven) but does not invoke PSP-side refund execution; live money movement lands with PSP wiring | 2 | 3 | 6 | Wire RefundCreateView → services.refund (stripe.Refund.create) at live PSP wiring, test-mode first | Marketplace | open | 2026-11-15 |
 
 Status values: `open`, `mitigating`, `accepted`, `closed`.
@@ -25,7 +25,7 @@ Accepted risks require a signed acceptance note in the treatment plan.
 ## Closure record — STEP 22c re-audit (2026-08-17, independent)
 
 All closures below rest on evidence reproduced by the STEP 22c re-audit
-(canonical report: `jol-m-infrastructure/STEP22C_FINAL_REAUDIT.md`), not
+(canonical report: `jolarca-infrastructure/STEP22C_FINAL_REAUDIT.md`), not
 on execution self-attestation.
 
 - **RSK-006 / PB-01…PB-06 — CLOSED.** Purge merged in jol-hub PR #76

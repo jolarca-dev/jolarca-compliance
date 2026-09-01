@@ -1,5 +1,5 @@
 [project]
-name = "jol-m-compliance"
+name = "jolarca-compliance"
 version = "0.1.0"
 description = "Compliance governance (GDPR / ISO 27001 / SOC 2) for the Journey Of Life marketplace"
 readme = "README.md"
