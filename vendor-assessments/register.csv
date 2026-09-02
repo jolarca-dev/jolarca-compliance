@@ -8,3 +8,6 @@ dpd,Processor shipping,ROPA-003,no,,no,EU-only,2027-08-15,TBD,onboarding
 omniva,Processor shipping,ROPA-003,no,,no,EU-only,2027-08-15,TBD,onboarding
 bitrix24,Processor CRM support,support-cases,no,,maybe,verify-hosting,2027-08-15,TBD,onboarding
 sentry-or-glitchtip,Processor error tracking,telemetry,no,,maybe,verify,2027-08-15,TBD,onboarding
+proxmox,Infrastructure hypervisor,N/A,no,,no,self-hosted,2027-09-02,TBD,onboarding
+hetzner,Processor offsite backup,ROPA-003,no,,no,EU-only,2027-09-02,TBD,onboarding
+letsencrypt,Processor TLS certificates,N/A,no,,no,no-personal-data,2027-09-02,TBD,onboarding
