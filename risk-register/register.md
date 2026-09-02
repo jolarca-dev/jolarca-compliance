@@ -24,7 +24,8 @@ Reviewed at every gate and quarterly. See `README.md` for scoring model.
 
 - **Likelihood**: Very Low (1) / Low (2) / Medium (3) / High (4) / Very High (5)
 - **Impact**: Low (1) / Medium (2) / High (3) / Very High (4) / Critical (5)
-- **Score**: Likelihood × Impact — Low (1-4) / Medium (5-9) / High (10-16) / Critical (17-25)
+- **Score**: Likelihood × Impact —
+  Low (1-4) / Medium (5-9) / High (10-16) / Critical (17-25)
 
 ## Review History
 

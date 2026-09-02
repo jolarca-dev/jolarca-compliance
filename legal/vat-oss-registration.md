@@ -1,5 +1,4 @@
 ---
-title: "VAT OSS Registration Status"
 version: "1.0.0"
 status: "initiated"
 created: "2026-09-02"

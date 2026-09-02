@@ -1,5 +1,4 @@
 ---
-title: "DPIA 001 — Identity and Consent"
 version: "1.0.0"
 status: "reviewed"
 owner: "Compliance Team"
@@ -16,10 +15,12 @@ gate: "G1"
 ## 1. Processing Description
 
 ### Purpose
+
 Processing of user identity data for registration, authentication,
 identity verification (KYC-lite for sellers), and consent management.
 
 ### Data Subjects
+
 - **Buyers**: individuals registering accounts to purchase goods.
 - **Sellers**: traders registering to sell on the marketplace (KYC-lite).
 
@@ -36,7 +37,8 @@ identity verification (KYC-lite for sellers), and consent management.
 | Login IP + timestamp | Buyers + Sellers | No |
 
 ### Data Flows
-```
+
+```text
 User browser → [TLS] → nginx edge → Django backend
   ├── Registration → jol_marketplace.users_user (pgcrypto encrypted fields)
   ├── Authentication → Django auth + django-axes (brute-force protection)

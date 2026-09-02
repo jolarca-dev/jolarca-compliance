@@ -1,5 +1,4 @@
 ---
-title: "DPIA 004 — Geolocation Search"
 version: "1.0.0"
 status: "reviewed"
 owner: "Compliance Team"
@@ -16,10 +15,12 @@ gate: "G2"
 ## 1. Processing Description
 
 ### Purpose
+
 Location-based search for parcel lockers, seller proximity, and
 delivery options. PostGIS geospatial queries on product/seller locations.
 
 ### Data Subjects
+
 - **Buyers**: delivery address, locker preference, IP-based location.
 - **Sellers**: business address (for proximity calculations).
 
@@ -33,7 +34,8 @@ delivery options. PostGIS geospatial queries on product/seller locations.
 | Seller business address | Sellers | No |
 
 ### Data Flows
-```
+
+```text
 Buyer browser → Django backend → search_app
   ├── Geo-IP lookup (IP → approximate country/city)
   ├── PostGIS distance query (buyer location → nearest lockers)

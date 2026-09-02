@@ -1,5 +1,4 @@
 ---
-title: "DPIA 002 — AI Processing (LLM Egress)"
 version: "1.0.0"
 status: "reviewed"
 owner: "Compliance Team"
@@ -16,11 +15,13 @@ gate: "G2"
 ## 1. Processing Description
 
 ### Purpose
+
 AI-assisted catalog translation, product description generation, and
 search embedding. Outbound calls to LLM providers (self-hosted, DeepL,
 OpenAI, Anthropic) with PII guardrails.
 
 ### Data Subjects
+
 - **Sellers**: product data submitted for translation/enrichment.
 - **Buyers**: search queries (if AI-enhanced search is enabled).
 
@@ -38,7 +39,8 @@ reveal religious beliefs when sent to LLM providers. The PII guardrail
 filters personal data but does NOT filter religious content indicators.
 
 ### Data Flows
-```
+
+```text
 Seller dashboard → Django backend → ai_service_app
   ├── PII guardrail check (filters names, emails, phones)
   ├── Provider routing (self-hosted → DeepL → OpenAI → Anthropic)
@@ -109,6 +111,7 @@ Seller dashboard → Django backend → ai_service_app
 ## 7. Conclusion & Sign-off
 
 **Residual risk acceptable: YES, with conditions.**
+
 1. PII guardrail must remain fail-closed (AI_PII_FILTER_ENABLED=true)
 2. Self-hosted provider preferred for religious/sensitive content
 3. No prompt/response content stored (verified by code review)

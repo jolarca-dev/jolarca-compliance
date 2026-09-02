@@ -1,5 +1,4 @@
 ---
-title: "DPIA 003 — Payments and VAT Data Processing"
 version: "1.0.0"
 status: "reviewed"
 owner: "Compliance Team"
@@ -47,7 +46,7 @@ explicitly assesses this as high-risk processing requiring enhanced safeguards.
 
 ### Data Flows
 
-```
+```text
 Buyer browser → [TLS] → nginx edge → Django backend
   ├── Stripe Elements (client-side tokenization) → Stripe API (PCI DSS SAQ-A)
   │     └── payment_method token → jol_marketplace.orders (no PAN stored)
@@ -157,6 +156,7 @@ Quarterly: OSS return → VMI (identity member state)
 ### Residency
 
 All personal data resides in the EU:
+
 - **Primary**: Proxmox bare metal in EU datacenter (LT)
 - **Backup**: EU-based offsite storage (Hetzner or equivalent)
 - **Stripe**: EU entity (Stripe Payments Europe Ltd, Dublin)
@@ -205,12 +205,14 @@ product category processing is incidental to contract performance.
 
 The high-risk items (payment token leakage, religious data exposure,
 invoice breach) are mitigated by:
+
 - Stripe SAQ-A (no PAN stored)
 - pgcrypto encryption for religious product data
 - Immutable, encrypted invoice storage with access logging
 - Backup encryption (BorgBackup repokey-blake2)
 
 The conditions for acceptance:
+
 1. VIES live validation must be implemented (this DPIA blocks until done)
 2. i.SAF monthly export must be operational
 3. First restore drill must pass (P4 deliverable)
@@ -238,7 +240,7 @@ Upon DPO signature, compute SHA-256 of this document and record in
 `audits/evidence-registry.csv`. The signed DPIA is immutable; any
 amendment requires a new version with a new hash.
 
-```
+```text
 SHA-256: [COMPUTE AFTER SIGNATURE]
 ```
 
