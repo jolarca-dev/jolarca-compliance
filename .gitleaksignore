@@ -1,0 +1,4 @@
+# Planted dummy tokens in audit documentation — not real secrets.
+# SOC 2 CC6.6: these are documented test vectors, not leaked credentials.
+8b41ca4a4f2dc5508d5b0844caa7f9ec8839499b:audits/internal/2026-08-initial-build-audit/AUDIT_REPORT.md:aws-access-token:108
+e4e04ff643a31d35330a7a62fd63560f37470052:audits/internal/2026-08-initial-build-audit/AUDIT_REPORT.md:aws-access-token:108
