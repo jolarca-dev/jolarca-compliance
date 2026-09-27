@@ -28,3 +28,15 @@ local-evidence/
 dsr-working/
 *.eml
 *.msg
+
+# Policy-mandated exclusions — jolarca-control policy/repo-defaults.yml
+# data_handling.required_gitignore_patterns (readiness audit F-12).
+# Key material, certs and Terraform state must never reach the object store.
+*.pem
+*.key
+*.p12
+secrets.json
+credentials.json
+*.tfstate
+*.tfstate.*
+.terraform/
