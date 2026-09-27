@@ -1,6 +1,20 @@
 # security.yml — gitleaks secret scanning in CI.
 # Pre-commit runs gitleaks locally, but CI catches bypasses (--no-verify).
 # SOC 2 CC6.6: secrets must never reach git history.
+#
+# Two invariants this job must never lose:
+#
+#   1. ONE gitleaks version everywhere — here, .pre-commit-config.yaml, and the
+#      local binary. Three versions in play means "scan clean" is not a
+#      reproducible claim (readiness audit 2026-09-27, F-08).
+#
+#   2. A negative control runs BEFORE the real scans. A green scan is only
+#      evidence if the scanner is known to fire on a positive case; otherwise
+#      "0 findings" means "not looking". Concretely: a root .gitleaks.toml with
+#      [extend] useDefault = true resolves to an EMPTY ruleset in gitleaks
+#      8.30.1, and because CI passes no --config that file is auto-loaded — so
+#      this job would go permanently green while detecting nothing. The control
+#      below is what turns that silent failure into a red build.
 name: security
 on:
   pull_request:
@@ -10,6 +24,8 @@ on:
     - cron: "17 3 * * *"   # nightly full-history scan
 permissions:
   contents: read
+env:
+  GL_VER: "8.30.1"
 jobs:
   security:
     runs-on: ubuntu-latest
@@ -17,10 +33,26 @@ jobs:
       - uses: actions/checkout@v7
         with:
           fetch-depth: 0
-      - name: Gitleaks (full history)
+      - name: Install gitleaks ${{ env.GL_VER }}
         run: |
-          GL_VER=8.21.2
           curl -fsSL "https://github.com/gitleaks/gitleaks/releases/download/v${GL_VER}/gitleaks_${GL_VER}_linux_x64.tar.gz" \
             | tar xz gitleaks
           sudo mv gitleaks /usr/local/bin/
-          gitleaks detect --source . --no-banner --redact
+          gitleaks version
+      # Planted credential is assembled at runtime from two halves so that no
+      # credential-shaped literal ever lands in a tracked file.
+      - name: Negative control — fail if the ruleset is empty
+        run: |
+          nc="$(mktemp -d)"
+          printf 'token = "%s%s"\n' "aB3dE5fG7hI9jK1l" "M3nO5pQ7rS9tU1vW" > "$nc/positive.md"
+          if gitleaks dir "$nc" --no-banner --redact; then
+            rm -rf "$nc"
+            echo "::error::NEGATIVE CONTROL FAILED — a planted credential was not detected. The ruleset is empty or misconfigured, so every scan below is meaningless."
+            exit 1
+          fi
+          rm -rf "$nc"
+          echo "negative control OK — scanner fires on a planted credential"
+      - name: Gitleaks (working tree)
+        run: gitleaks dir . --no-banner --redact
+      - name: Gitleaks (full history)
+        run: gitleaks git . --no-banner --redact
