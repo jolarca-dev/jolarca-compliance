@@ -2,3 +2,20 @@
 # SOC 2 CC6.6: these are documented test vectors, not leaked credentials.
 8b41ca4a4f2dc5508d5b0844caa7f9ec8839499b:audits/internal/2026-08-initial-build-audit/AUDIT_REPORT.md:aws-access-token:108
 e4e04ff643a31d35330a7a62fd63560f37470052:audits/internal/2026-08-initial-build-audit/AUDIT_REPORT.md:aws-access-token:108
+
+# Verified false positive (readiness audit 2026-09-27, finding F-09).
+# generic-api-key fires on a path-like phrase in the prose of the STEP 22c
+# re-audit report at line 35 (entropy 3.88) and reads it as a credential value.
+# No secret exists. That file is finalized, hash-registered evidence, so it must
+# not be reworded merely to satisfy a scanner.
+#
+# WARNING: never quote the offending phrase in this file. Doing so reproduces
+# the match here and the ignore file then flags ITSELF (observed 2026-09-28).
+#
+# Fingerprints pin commit:file:rule:line, so if that line moves the entry stops
+# matching and the scan fails CLOSED. Re-triage; do not re-pin blindly.
+# Three entries because CI scans history (commit-qualified) and the working
+# tree (unqualified).
+e71d2ab6035e08679e650bb2dde4ce6ea020ce1a:audits/internal/2026-08-step22c-payment-boundary-reaudit/AUDIT_REPORT.md:generic-api-key:35
+a8863a15363987b248e95b04ee524ffbeefa3f78:audits/internal/2026-08-step22c-payment-boundary-reaudit/AUDIT_REPORT.md:generic-api-key:35
+audits/internal/2026-08-step22c-payment-boundary-reaudit/AUDIT_REPORT.md:generic-api-key:35
