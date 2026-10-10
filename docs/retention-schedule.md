@@ -20,6 +20,7 @@ never be asserted as fact in downstream artifacts.
 | RC-AI | Prompts/outputs | ≤ 30 days | Hard delete |
 | RC-LOCATION | Geolocation history | ≤ 90 days | Hard delete |
 | RC-SUPPORT | Support cases | 3y after closure | Hard delete |
+| RC-CONSENT | Consent grants/withdrawals (ConsentRecord) | Consent lifetime + 3y after withdrawal or last processing act under that consent (whichever is later); Art. 7(1) demonstrability | Hard delete after expiry; withdrawal record retained to prove Art. 7(3) compliance |
 | RC-LOGS | Audit logs | 5y | Archive then delete |
 | RC-DSR-VERIFY | DSR identity verification material | Deleted after verification (GDPR Art. 12(6) minimization) | Immediate |
 | RC-EVIDENCE | Finalized compliance evidence | 10y minimum / per legal advice | Never delete; archive |
@@ -46,6 +47,7 @@ file in regulator-facing documents until counsel signs off (§4).
 | Seller KYC/verification dossiers (business data only) | RC-KYC | 5y operational | Anonymize per ADR-0001 |
 | Seller payout / verification records touching **employment-adjacent personal data** (e.g., individual-activity sellers, worker-like arrangements) | RC-PAYROLL-50Y candidate | up to 50y if class confirmed | Anonymize still technically applicable, but the legal-hold window extends decades: **legal-hold override of GDPR Art. 17 erasure (Art. 17(3)(b) legal obligation) documented; flagged for DPO review** |
 | Buyer-side personal data on invoices | RC-FINANCIAL | 10y | Identifiers anonymized; fiscal fields retained |
+| Consent grant/withdrawal records (ConsentRecord) | RC-CONSENT | Consent lifetime + 3y | Hard delete after expiry; withdrawal proof retained |
 
 Collision note: for RC-PAYROLL-50Y, anonymize-don't-delete remains the
 mechanism, but response letters must cite the overriding legal obligation and

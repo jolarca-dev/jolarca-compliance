@@ -5,3 +5,4 @@ ROPA-003,orders-payments,Order & payment processing,Art. 6(1)(b) contract,Order;
 ROPA-004,sellers-vies,VAT number validation,Art. 6(1)(c) legal obligation,VAT ID; business name,Sellers,RC-FINANCIAL,EU VIES service,EU-only,2026-08-15
 ROPA-005,ai-service,Translation & embeddings,Art. 6(1)(b) contract + consent,Listing text; messages,Users; sellers,RC-AI,DeepL; OpenAI; Anthropic; self-hosted,SCC+TIA per vendor,2026-08-15
 ROPA-006,geolocation-search,Proximity search,Consent Art. 6(1)(a),Coarse location,Users,RC-LOCATION,none,EU-only,2026-08-15
+ROPA-007,consent-registry,Consent grant & withdrawal ledger,Art. 6(1)(c) legal obligation (Art. 7(1) demonstrability),User ID; consent version ID; timestamp; purpose tag; grant/withdrawal status,Users; sellers,RC-CONSENT,none,EU-only,2026-09-28

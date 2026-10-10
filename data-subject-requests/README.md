@@ -5,6 +5,10 @@
 `intake (DSR issue form) → identity verification → scope assessment →
 30-day clock → fulfillment → response letter → register closure`
 
+**Operational runbook:** see `cross-service-dsar-runbook.md` for the full
+step-by-step procedure covering all 9 personal-data systems, 11 processors,
+and the day-by-day timeline within the 30-day deadline.
+
 1. Clock starts at **receipt** (Art. 12(3)); DPO paged at day 21
    (`dsr-sla-monitor.yml`); extension max +2 months only with documented
    complexity/volume justification and subject notification within 30 days.

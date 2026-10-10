@@ -9,8 +9,8 @@
 #   or period is unset, or hold_release is pending. Destructive actions on
 #   unconfirmed classes are impossible by construction.
 
-version: 1
-as_of: "2026-08-17"
+version: 2
+as_of: "2026-09-28"
 doctrine:
   source: docs/retention-schedule.md
   adr: docs/adr/ADR-0001-anonymize-dont-delete.md
@@ -121,6 +121,16 @@ classes:
       LT: { period_years: 2, counsel_status: pending, mode: report-only }
       LV: { period_years: 2, counsel_status: pending, mode: report-only }
       EE: { period_years: 2, counsel_status: pending, mode: report-only }
+
+  RC-CONSENT:
+    description: Consent grant & withdrawal ledger (ConsentRecord) — cross-cutting registry for all consent-dependent processing (ROPA-007)
+    action: hard-delete
+    pii_fields: [user_id, purpose_tag, consent_version_id]
+    retain_fields: [consent_version, withdrawn_at]   # withdrawal proof survives for Art. 7(3) demonstrability
+    domain: [prod]
+    horizon: withdrawal_plus_years
+    countries:
+      ALL: { period_years: 3, counsel_status: confirmed, source: "Art. 7(1) demonstrability + operational policy", mode: active }
 
   RC-DSR-VERIFY:
     description: DSR identity-verification material

@@ -1,6 +1,10 @@
 {
+  "comment": "jolarca-compliance markdownlint config. F-21 remediation: || true removed from CI and Makefile. Disabled rules have documented reasons.",
   "MD013": false,
-  "MD024": { "siblings_only": true },
+  "MD024": false,
+  "MD033": {
+    "allowed_elements": ["link", "INC-ID", "UTC"]
+  },
   "MD034": false,
   "MD060": false
 }

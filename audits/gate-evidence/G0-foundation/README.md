@@ -2,7 +2,7 @@
 
 Immutable once the gate passes. Required artifacts:
 
-- [ ] DPO appointment letter (hashed)
+- [ ] DPO designation decision (`management-review/dpo-reports/dpo-designation-decision-art37.md`, hashed)
 - [ ] CI green proof (workflow run link + export)
 - [ ] Threat model sign-off
 - [ ] ISMS scope statement draft

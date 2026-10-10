@@ -135,16 +135,19 @@ class TestActiveActions(RetentionTestBase):
 
     def test_hard_delete_and_archive_and_never(self):
         store, counts = self.run_prod()
-        for rid in ("ACC-2020-LT", "AI-OLD", "LOC-OLD", "SUP-2020"):
+        for rid in ("ACC-2020-LT", "AI-OLD", "LOC-OLD", "SUP-2020",
+                     "CONSENT-OLD"):
             self.assertIsNone(store.get(rid), f"{rid} should be deleted")
         archived = store.get("LOG-2019")
         self.assertEqual(archived["fields"]["actor_id"], "__ERASED__")
         self.assertIsNotNone(store.get("EVI-001"), "evidence is never-delete")
         self.assertIsNotNone(store.get("ACC-RECENT-LT"), "under horizon")
-        self.assertEqual(counts.get("DELETED"), 4)
+        self.assertIsNotNone(store.get("CONSENT-RECENT"),
+                             "recent consent under horizon")
+        self.assertEqual(counts.get("DELETED"), 5)
         self.assertEqual(counts.get("ARCHIVED_THEN_DELETED"), 1)
         self.assertEqual(counts.get("RETAINED_NEVER"), 1)
-        self.assertEqual(counts.get("RETAINED_YOUNG"), 1)
+        self.assertEqual(counts.get("RETAINED_YOUNG"), 2)
 
 
 class TestAdversarialAnonymization(RetentionTestBase):
@@ -194,6 +197,45 @@ class TestWarehousePropagation(RetentionTestBase):
         self.assertEqual(counts["PROPAGATION_MISS"], 1)
         post = warehouse.scan_for_raw_pii(wh_store, known_raw, self.matrix)
         self.assertEqual(post, [], "post-propagation leak scan must be clean")
+
+
+class TestConsentRetention(RetentionTestBase):
+    """RC-CONSENT: consent registry TTL enforcement (ROPA-007)."""
+
+    def test_expired_consent_hard_deleted(self):
+        """Consent withdrawn >3y ago (anchor 2020-06-01) must be deleted."""
+        store, counts = self.run_prod()
+        self.assertIsNone(store.get("CONSENT-OLD"),
+                          "expired consent record must be hard-deleted")
+        self.assertGreaterEqual(counts.get("DELETED", 0), 1)
+
+    def test_recent_consent_retained(self):
+        """Active consent (anchor 2026-06-01) must be retained."""
+        store, _ = self.run_prod()
+        rec = store.get("CONSENT-RECENT")
+        self.assertIsNotNone(rec, "recent consent must be retained")
+        self.assertEqual(rec["fields"]["user_id"], "SYN-U-CONSENT-2",
+                         "retained consent fields must be intact")
+
+    def test_consent_audit_trail_logs_deletion(self):
+        """Every consent deletion must appear in the audit trail."""
+        self.run_prod()
+        row = next(r for r in self.trail.rows()
+                   if r["record_id"] == "CONSENT-OLD")
+        self.assertEqual(row["decision"], "DELETED")
+        self.assertIn("past horizon", row["reason"])
+
+    def test_consent_active_mode_for_all(self):
+        """RC-CONSENT is confirmed for ALL countries — must be active."""
+        mode, reason = mx.effective_mode(
+            self.matrix["classes"]["RC-CONSENT"], "ALL")
+        self.assertEqual(mode, "active")
+        self.assertIn("confirmed", reason)
+
+    def test_consent_horizon_is_3_years(self):
+        """RC-CONSENT horizon = 3 * 365 = 1095 days."""
+        horizon = mx.horizon_days(self.matrix["classes"]["RC-CONSENT"], "ALL")
+        self.assertEqual(horizon, 3 * 365)
 
 
 class TestSchedulerAndAudit(RetentionTestBase):

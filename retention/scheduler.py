@@ -16,6 +16,7 @@ from pathlib import Path
 CLASS_CADENCE_DAYS = {
     "RC-AI": 1, "RC-LOCATION": 1, "RC-DSR-VERIFY": 1,
     "RC-ACCOUNT": 7, "RC-SUPPORT": 7, "RC-MARKETING-CONSENT": 7,
+    "RC-CONSENT": 7,
     "RC-KYC": 30, "RC-ACCT-10Y": 30, "RC-PAYROLL-50Y": 30,
     "RC-LOGS": 30, "RC-EVIDENCE": 365,
 }

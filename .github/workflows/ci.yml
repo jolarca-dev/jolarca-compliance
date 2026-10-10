@@ -12,12 +12,12 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
         with:
           python-version: "3.12"
       - name: Markdown lint
-        run: npx --yes markdownlint-cli2 "**/*.md" "#.venv" "#node_modules" || true
+        run: npx --yes markdownlint-cli2 "**/*.md" "#.venv" "#node_modules"
       - name: YAML validation
         run: |
           python -m pip install --quiet pyyaml

@@ -12,7 +12,7 @@ check: lint-docs verify-signatures redact-check
 
 ## Markdown lint (markdownlint-cli2 via npx; config inherited)
 lint-docs:
-	npx --yes markdownlint-cli2 "**/*.md" "#.venv" "#node_modules" || true
+	npx --yes markdownlint-cli2 "**/*.md" "#.venv" "#node_modules"
 
 ## Verify finalized evidence hashes against the registry
 verify-signatures:
